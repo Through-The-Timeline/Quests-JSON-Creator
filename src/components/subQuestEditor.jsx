@@ -1,6 +1,6 @@
-import DependencyEditor from "./DependencyEditor";
-import RequirementEditor from "./RequirementEditor";
-import RewardEditor from "./RewardEditor";
+import DependencyEditor from "./dependencyEditor";
+import RequirementEditor from "./requirementEditor";
+import RewardEditor from "./rewardEditor";
 import {createEmptyRequirement, emptyDependency, emptyReward} from "../lib/defaultStructure";
 
 export default function SubQuestEditor({ subQuest, onChange, onRemove }) {
