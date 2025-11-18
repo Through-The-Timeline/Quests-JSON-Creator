@@ -1,4 +1,4 @@
-import SubQuestEditor from "./SubQuestEditor";
+import SubQuestEditor from "./subQuestEditor";
 import { emptySubQuest } from "../lib/defaultStructure";
 
 export default function QuestEditor({ quest, onChange }) {
