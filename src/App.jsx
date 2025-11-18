@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { emptyQuest } from "./lib/defaultStructure";
-import QuestEditor from "./components/QuestEditor";
+import QuestEditor from "./components/questEditor";
 
 export default function App() {
     const [quest, setQuest] = useState(emptyQuest);
