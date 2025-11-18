@@ -1,4 +1,3 @@
-import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from "@/components/ui/select";
 import {REWARD_TYPES} from "@/lib/defaultStructure.js";
 
 export default function RewardEditor({ reward, onChange, onRemove }) {

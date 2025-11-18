@@ -1,4 +1,3 @@
-import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from "@/components/ui/select";
 import {QUEST_STATES} from "@/lib/defaultStructure.js";
 
 export default function DependencyEditor({ dep, onChange, onRemove }) {
