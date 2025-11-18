@@ -1,4 +1,4 @@
-import {QUEST_STATES} from "@/lib/defaultStructure.js";
+import {QUEST_STATES} from "../lib/defaultStructure.js";
 
 export default function DependencyEditor({ dep, onChange, onRemove }) {
     return (

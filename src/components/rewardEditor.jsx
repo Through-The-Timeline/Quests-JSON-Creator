@@ -1,4 +1,4 @@
-import {REWARD_TYPES} from "@/lib/defaultStructure.js";
+import {REWARD_TYPES} from "../lib/defaultStructure.js";
 
 export default function RewardEditor({ reward, onChange, onRemove }) {
     const change = (field, value) => onChange({ ...reward, [field]: value });
