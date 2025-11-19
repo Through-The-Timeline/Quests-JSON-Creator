@@ -21,7 +21,7 @@ export default function RequirementEditor({ req, onChange, onRemove }) {
             {/* Champ dynamique selon type */}
             {req.type === "KILL_ENTITY" && (
                 <input
-                    className="input w-40"
+                    className="bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-white/40"
                     placeholder="Entité"
                     value={req.entity}
                     onChange={(e) => updateField("entity", e.target.value)}
@@ -29,7 +29,7 @@ export default function RequirementEditor({ req, onChange, onRemove }) {
             )}
             {(req.type === "BRING_ITEM" || req.type === "CRAFT_ITEM") && (
                 <input
-                    className="input w-40"
+                    className="bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-white/40"
                     placeholder="Item"
                     value={req.item}
                     onChange={(e) => updateField("item", e.target.value)}
@@ -37,7 +37,7 @@ export default function RequirementEditor({ req, onChange, onRemove }) {
             )}
             {req.type === "BREAK_BLOCK" && (
                 <input
-                    className="input w-40"
+                    className="bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-white/40"
                     placeholder="Block"
                     value={req.block}
                     onChange={(e) => updateField("block", e.target.value)}
@@ -47,7 +47,7 @@ export default function RequirementEditor({ req, onChange, onRemove }) {
             {/* Quantity */}
             <input
                 type="number"
-                className="input w-20"
+                className="bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-white/40"
                 value={req.quantity || 1}
                 onChange={(e) => updateField("quantity", Number(e.target.value))}
             />

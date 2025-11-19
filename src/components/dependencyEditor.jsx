@@ -4,14 +4,14 @@ export default function DependencyEditor({ dep, onChange, onRemove }) {
     return (
         <div className="flex gap-2 items-center mt-2">
             <input
-                className="border p-2 rounded bg-neutral-900"
+                className="bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-white/40"
                 placeholder="questID"
                 value={dep.questID}
                 onChange={(e) => onChange({...dep, questID: e.target.value})}
             />
 
             <input
-                className="border p-2 rounded bg-neutral-900"
+                className="bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-white/40"
                 placeholder="subQuestID"
                 value={dep.subQuestID}
                 onChange={(e) => onChange({...dep, subQuestID: e.target.value})}

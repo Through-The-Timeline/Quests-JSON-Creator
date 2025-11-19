@@ -18,8 +18,7 @@ export default function SubQuestEditor({ subQuest, onChange, onRemove }) {
     };
 
     return (
-        <div
-            className="bg-neutral-900 shadow-lg rounded-2xl p-6 mb-4 border border-neutral-700 transition-all duration-200 hover:scale-[1.01]">
+        <div className="bg-neutral-900 shadow-lg rounded-2xl p-6 mb-4 border border-neutral-700 transition-all duration-200 hover:scale-[1.01]">
             <div className="flex justify-between items-center mb-3">
                 <h2 className="text-xl font-bold text-white">{subQuest.subQuestID}</h2>
                 <button
@@ -32,35 +31,35 @@ export default function SubQuestEditor({ subQuest, onChange, onRemove }) {
 
             <div className="grid gap-3">
                 <input
-                    className="input"
+                    className="bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-white/40"
                     placeholder="Nom de la sous-quête"
                     value={subQuest.subQuestName}
                     onChange={(e) => updateField("subQuestName", e.target.value)}
                 />
 
                 <textarea
-                    className="input h-24"
+                    className="bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-white/40"
                     placeholder="Dialogue"
                     value={subQuest.subQuestDialog}
                     onChange={(e) => updateField("subQuestDialog", e.target.value)}
                 />
 
                 <input
-                    className="input"
+                    className="bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-white/40"
                     placeholder="PNJ"
                     value={subQuest.subQuestPNJ}
                     onChange={(e) => updateField("subQuestPNJ", e.target.value)}
                 />
 
                 <input
-                    className="input"
+                    className="bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-white/40"
                     placeholder="Texte bouton start"
                     value={subQuest.bottomButtonStartText}
                     onChange={(e) => updateField("bottomButtonStartText", e.target.value)}
                 />
 
                 <input
-                    className="input"
+                    className="bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-white/40"
                     placeholder="Texte bouton end"
                     value={subQuest.bottomButtonEndText}
                     onChange={(e) => updateField("bottomButtonEndText", e.target.value)}

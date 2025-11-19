@@ -16,19 +16,21 @@ export default function RewardEditor({ reward, onChange, onRemove }) {
             </select>
 
             {(reward.type === "GIVE_ITEM" || reward.type === "UNLOCK_RECIPE") && (
-                <input className="input mt-2"
+                <input className="bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-white/40"
                        placeholder="item or recipe"
                        value={reward.item || ""}
                        onChange={(e) => change("item", e.target.value)}/>
             )}
 
             {reward.type === "UNLOCK_EFFECT" && (
-                <input className="input mt-2" placeholder="effect"
+                <input className="bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-white/40"
+                       placeholder="effect"
                        value={reward.effect || ""}
                        onChange={(e) => change("effect", e.target.value)}/>
             )}
 
-            <input className="input mt-2" placeholder="quantity" type="number"
+            <input className="bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-white/40"
+                   placeholder="quantity" type="number"
                    value={reward.quantity || 1}
                    onChange={(e) => change("quantity", Number(e.target.value))}/>
 

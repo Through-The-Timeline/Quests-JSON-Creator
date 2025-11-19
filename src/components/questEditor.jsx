@@ -16,14 +16,14 @@ export default function QuestEditor({ quest, onChange }) {
 
             <div className="grid gap-3">
                 <input
-                    className="input"
+                    className="bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-white/40"
                     placeholder="QuestID"
                     value={quest.questID}
                     onChange={(e) => updateField("questID", e.target.value)}
                 />
 
                 <input
-                    className="input"
+                    className="bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-white/40"
                     placeholder="Nom de la quête"
                     value={quest.questName}
                     onChange={(e) => updateField("questName", e.target.value)}
