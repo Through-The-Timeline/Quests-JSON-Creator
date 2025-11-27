@@ -1,7 +1,7 @@
 // src/components/SubQuestEditor.jsx
 import React from "react";
-import RequirementEditor from "./RequirementEditor";
-import RewardEditor from "./RewardEditor";
+import RequirementEditor from "./requirementEditor.jsx";
+import RewardEditor from "./rewardEditor.jsx";
 import { REQUIREMENT_TYPES, REWARD_TYPES } from "../lib/defaultStructure.js";
 
 /**
