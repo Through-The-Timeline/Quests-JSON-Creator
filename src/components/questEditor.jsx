@@ -1,6 +1,6 @@
 // src/components/QuestEditor.jsx
 import React from "react";
-import SubQuestEditor from "./SubQuestEditor";
+import SubQuestEditor from "./subQuestEditor.jsx";
 import { EMPTY_SUBQUEST } from "../lib/defaultStructure.js";
 
 /**
