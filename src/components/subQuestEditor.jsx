@@ -1,129 +1,191 @@
-import DependencyEditor from "./dependencyEditor";
-import RequirementEditor from "./requirementEditor";
-import RewardEditor from "./rewardEditor";
-import {createEmptyRequirement, emptyDependency, emptyReward} from "../lib/defaultStructure";
+// src/components/SubQuestEditor.jsx
+import React from "react";
+import RequirementEditor from "./RequirementEditor";
+import RewardEditor from "./RewardEditor";
+import { REQUIREMENT_TYPES, REWARD_TYPES } from "../lib/defaultStructure.js";
 
-export default function SubQuestEditor({ subQuest, onChange, onRemove }) {
+/**
+ * Helper to create a clean empty requirement depending on type
+ */
+const createEmptyRequirement = (type = "bring_item") => {
+    switch (type) {
+        case "bring_item": return { type, item: "", quantity: 1 };
+        case "craft_item": return { type, item: "", quantity: 1 };
+        case "break_block": return { type, block: "", tool: "", quantity: 1 };
+        case "kill_entity": return { type, entity: "", quantity: 1 };
+        case "quest": return { type, questID: "", subQuestID: "", state: "STARTED" };
+        default: return { type };
+    }
+};
 
+const createEmptyReward = (type = "give_item") => {
+    switch (type) {
+        case "give_item": return { type, item: "", quantity: 1 };
+        default: return { type };
+    }
+};
+
+export default function SubQuestEditor({
+                                           subQuest,
+                                           onChange,
+                                           onRemove,
+                                           allQuestIDs = []
+                                       }) {
     const updateField = (field, value) => onChange({ ...subQuest, [field]: value });
 
-    const updateArrayField = (field, index, value) => {
-        const updated = [...subQuest[field]];
-        updated[index] = value;
-        updateField(field, updated);
+    const updateRequirement = (index, newReq) => {
+        const arr = [...(subQuest.requirements || [])];
+        arr[index] = newReq;
+        updateField("requirements", arr);
     };
 
-    const removeArrayItem = (field, index) => {
-        updateField(field, subQuest[field].filter((_, i) => i !== index));
+    const removeRequirement = (index) => {
+        updateField("requirements", (subQuest.requirements || []).filter((_, i) => i !== index));
+    };
+
+    const addRequirement = (type = "bring_item") => {
+        updateField("requirements", [...(subQuest.requirements || []), createEmptyRequirement(type)]);
+    };
+
+    const updateReward = (index, newRw) => {
+        const arr = [...(subQuest.rewards || [])];
+        arr[index] = newRw;
+        updateField("rewards", arr);
+    };
+
+    const removeReward = (index) => {
+        updateField("rewards", (subQuest.rewards || []).filter((_, i) => i !== index));
+    };
+
+    const addReward = (type = "give_item") => {
+        updateField("rewards", [...(subQuest.rewards || []), createEmptyReward(type)]);
     };
 
     return (
-        <div className="bg-neutral-900 shadow-lg rounded-2xl p-6 mb-4 border border-neutral-700 transition-all duration-200 hover:scale-[1.01]">
-            <div className="flex justify-between items-center mb-3">
-                <h2 className="text-xl font-bold text-white">{subQuest.subQuestID}</h2>
-                <button
-                    onClick={onRemove}
-                    className="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded transition-all duration-200"
-                >
-                    Supprimer
-                </button>
+        <div className="rounded-2xl border border-white/10 bg-zinc-900/60 p-6 shadow-lg shadow-black/40 mb-6">
+            <div className="flex justify-between items-start gap-4 mb-4">
+                <div className="flex-1">
+                    <label className="text-sm text-neutral-300">SubQuest ID</label>
+                    <input
+                        className="mt-1 w-full bg-zinc-900/80 border border-white/10 rounded-lg px-3 py-2 text-white"
+                        value={subQuest.subQuestID || ""}
+                        onChange={(e) => updateField("subQuestID", e.target.value)}
+                    />
+                </div>
+
+                <div className="flex-shrink-0">
+                    <button
+                        onClick={onRemove}
+                        className="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded"
+                        title="Supprimer la sous-quête"
+                    >
+                        Supprimer
+                    </button>
+                </div>
             </div>
 
             <div className="grid gap-3">
                 <input
-                    className="bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-white/40"
+                    className="bg-zinc-900/80 border border-white/10 rounded-lg px-3 py-2 text-white"
                     placeholder="Nom de la sous-quête"
-                    value={subQuest.subQuestName}
+                    value={subQuest.subQuestName || ""}
                     onChange={(e) => updateField("subQuestName", e.target.value)}
                 />
 
                 <textarea
-                    className="bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-white/40"
+                    className="bg-zinc-900/80 border border-white/10 rounded-lg px-3 py-2 text-white h-28"
                     placeholder="Dialogue"
-                    value={subQuest.subQuestDialog}
+                    value={subQuest.subQuestDialog || ""}
                     onChange={(e) => updateField("subQuestDialog", e.target.value)}
                 />
 
                 <input
-                    className="bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-white/40"
+                    className="bg-zinc-900/80 border border-white/10 rounded-lg px-3 py-2 text-white"
                     placeholder="PNJ"
-                    value={subQuest.subQuestPNJ}
+                    value={subQuest.subQuestPNJ || ""}
                     onChange={(e) => updateField("subQuestPNJ", e.target.value)}
                 />
 
-                <input
-                    className="bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-white/40"
-                    placeholder="Texte bouton start"
-                    value={subQuest.bottomButtonStartText}
-                    onChange={(e) => updateField("bottomButtonStartText", e.target.value)}
-                />
-
-                <input
-                    className="bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-white/40"
-                    placeholder="Texte bouton end"
-                    value={subQuest.bottomButtonEndText}
-                    onChange={(e) => updateField("bottomButtonEndText", e.target.value)}
-                />
+                <div className="flex gap-2">
+                    <input
+                        className="bg-zinc-900/80 border border-white/10 rounded-lg px-3 py-2 text-white flex-1"
+                        placeholder="Texte bouton start"
+                        value={subQuest.bottomButtonStartText || ""}
+                        onChange={(e) => updateField("bottomButtonStartText", e.target.value)}
+                    />
+                    <input
+                        className="bg-zinc-900/80 border border-white/10 rounded-lg px-3 py-2 text-white flex-1"
+                        placeholder="Texte bouton end"
+                        value={subQuest.bottomButtonEndText || ""}
+                        onChange={(e) => updateField("bottomButtonEndText", e.target.value)}
+                    />
+                </div>
             </div>
 
-            {/* Dependencies */}
-            <h3 className="text-lg font-semibold border-b border-neutral-700 pb-1 mt-6 mb-2">Dépendances</h3>
-            {subQuest.dependencies.map((dep, i) => (
-                <DependencyEditor
-                    key={i}
-                    dep={dep}
-                    onChange={(d) => updateArrayField("dependencies", i, d)}
-                    onRemove={() => removeArrayItem("dependencies", i)}
-                />
-            ))}
-            <button
-                onClick={() => updateField("dependencies", [...subQuest.dependencies, {...emptyDependency}])}
-                className="bg-blue-600 hover:bg-blue-700 px-3 py-1 text-white rounded mt-2 transition-all duration-200"
-            >
-                + Ajouter dépendance
-            </button>
+            <hr className="border-white/10 my-4" />
 
-            {/* Requirements */}
-            <h3 className="text-lg font-semibold border-b border-neutral-700 pb-1 mt-6 mb-2">Requirements</h3>
-            {subQuest.requirements.map((req, i) => (
-                <RequirementEditor
-                    key={i}
-                    req={req}
-                    onChange={(r) => updateArrayField("requirements", i, r)}
-                    onRemove={() => removeArrayItem("requirements", i)}
-                />
-            ))}
+            <h4 className="font-semibold mb-3 text-neutral-200">Requirements</h4>
+            <div className="space-y-3">
+                {(subQuest.requirements || []).map((r, i) => (
+                    <RequirementEditor
+                        key={i}
+                        requirement={r}
+                        onChange={(newReq) => updateRequirement(i, newReq)}
+                        onRemove={() => removeRequirement(i)}
+                        allQuests={allQuestIDs}
+                    />
+                ))}
+            </div>
 
+            <div className="mt-3 flex gap-2">
+                <select
+                    className="bg-neutral-700 text-white px-2 py-1 rounded"
+                    onChange={(e) => addRequirement(e.target.value)}
+                    defaultValue=""
+                >
+                    <option value="" disabled>+ Ajouter requirement</option>
+                    {REQUIREMENT_TYPES.map(t => <option key={t} value={t}>{t}</option>)}
+                </select>
 
-            <button
-                onClick={() =>
-                    updateField("requirements", [
-                        ...subQuest.requirements,
-                        createEmptyRequirement("BRING_ITEM"), // type par défaut
-                    ])
-                }
-                className="bg-blue-600 hover:bg-blue-700 px-3 py-1 text-white rounded mt-2 transition-all duration-200"
-            >
-                + Ajouter requirement
-            </button>
+                <button
+                    onClick={() => addRequirement("bring_item")}
+                    className="bg-blue-600 hover:bg-blue-700 px-3 py-1 rounded text-white"
+                >
+                    Ajouter bring_item
+                </button>
+            </div>
 
+            <hr className="border-white/10 my-4" />
 
-            {/* Rewards */}
-            <h3 className="text-lg font-semibold border-b border-neutral-700 pb-1 mt-6 mb-2">Rewards</h3>
-            {subQuest.rewards.map((reward, i) => (
-                <RewardEditor
-                    key={i}
-                    reward={reward}
-                    onChange={(r) => updateArrayField("rewards", i, r)}
-                    onRemove={() => removeArrayItem("rewards", i)}
-                />
-            ))}
-            <button
-                onClick={() => updateField("rewards", [...subQuest.rewards, {...emptyReward}])}
-                className="bg-blue-600 hover:bg-blue-700 px-3 py-1 text-white rounded mt-2 transition-all duration-200"
-            >
-                + Ajouter reward
-            </button>
+            <h4 className="font-semibold mb-3 text-neutral-200">Rewards</h4>
+            <div className="space-y-3">
+                {(subQuest.rewards || []).map((rw, i) => (
+                    <RewardEditor
+                        key={i}
+                        reward={rw}
+                        onChange={(newRw) => updateReward(i, newRw)}
+                        onRemove={() => removeReward(i)}
+                    />
+                ))}
+            </div>
+
+            <div className="mt-3 flex gap-2">
+                <select
+                    className="bg-neutral-700 text-white px-2 py-1 rounded"
+                    onChange={(e) => addReward(e.target.value)}
+                    defaultValue=""
+                >
+                    <option value="" disabled>+ Ajouter reward</option>
+                    {REWARD_TYPES.map(t => <option key={t} value={t}>{t}</option>)}
+                </select>
+
+                <button
+                    onClick={() => addReward("give_item")}
+                    className="bg-blue-600 hover:bg-blue-700 px-3 py-1 rounded text-white"
+                >
+                    Ajouter give_item
+                </button>
+            </div>
         </div>
     );
 }
