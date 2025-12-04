@@ -5,7 +5,6 @@ export default function RewardEditor({reward, onChange, onRemove}) {
     const update = (field, val) =>
         onChange({...reward, [field]: val});
 
-
     return (
         <div className="border border-neutral-700 rounded-lg p-3 bg-neutral-900 space-y-2">
 
@@ -19,14 +18,23 @@ export default function RewardEditor({reward, onChange, onRemove}) {
                 ))}
             </select>
 
-            {(reward.type === "give_item" ||
-                reward.type === "unlock_recipe") && (
-                <input
-                    className="bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-white w-full"
-                    placeholder="item / recipe"
-                    value={reward.item || ""}
-                    onChange={e => update("item", e.target.value)}
-                />
+            {reward.type === "give_item"  && (
+                <>
+                    <input
+                        className="bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-white w-full"
+                        placeholder="Item"
+                        value={reward.item || ""}
+                        onChange={e => update("item", e.target.value)}
+                    />
+
+                    <input
+                        type="number"
+                        className="bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-white w-full"
+                        placeholder="Quantity"
+                        value={reward.quantity || ""}
+                        onChange={e => update("quantity", Number(e.target.value))}
+                    />
+                </>
             )}
 
             {reward.type === "give_effect" && (
@@ -51,7 +59,7 @@ export default function RewardEditor({reward, onChange, onRemove}) {
                         type="number"
                         className="bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-white w-full"
                         placeholder="level"
-                        value={reward.level ?? 1}
+                        value={reward.level ?? ""}
                         onChange={e => update("level", Number(e.target.value))}
                     />
                 </>
@@ -65,16 +73,6 @@ export default function RewardEditor({reward, onChange, onRemove}) {
                     onChange={e => update("effect", e.target.value)}
                 />
             )}
-
-            {reward.type !== "give_effect" && (
-                <input
-                    type="number"
-                    className="bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-white w-full"
-                    value={reward.quantity || 1}
-                    onChange={e => update("quantity", Number(e.target.value))}
-                />
-            )}
-
             <button
                 className="bg-red-600 px-3 py-1 rounded text-white"
                 onClick={onRemove}

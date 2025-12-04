@@ -9,10 +9,10 @@ import { REQUIREMENT_TYPES, REWARD_TYPES } from "../lib/defaultStructure.js";
  */
 const createEmptyRequirement = (type = "bring_item") => {
     switch (type) {
-        case "bring_item": return { type, item: "", quantity: 1 };
-        case "craft_item": return { type, item: "", quantity: 1 };
-        case "break_block": return { type, block: "", tool: "", quantity: 1 };
-        case "kill_entity": return { type, entity: "", quantity: 1 };
+        case "bring_item": return { type, item: "", quantity: "" };
+        case "craft_item": return { type, item: "", quantity: "" };
+        case "break_block": return { type, block: "", tool: "", quantity: "" };
+        case "kill_entity": return { type, entity: "", quantity: "" };
         case "quest": return { type, questID: "", subQuestID: "", state: "STARTED" };
         default: return { type };
     }
@@ -20,8 +20,8 @@ const createEmptyRequirement = (type = "bring_item") => {
 
 const createEmptyReward = (type = "give_item") => {
     switch (type) {
-        case "give_item": return { type, item: "", quantity: 1 };
-        case "give_effect": return { type, effect: "", duration: 1, level: 0};
+        case "give_item": return { type, item: "", quantity: "" };
+        case "give_effect": return { type, effect: "", duration: "", level: ""};
         default: return { type };
     }
 };
@@ -147,13 +147,6 @@ export default function SubQuestEditor({
                     <option value="" disabled>+ Ajouter requirement</option>
                     {REQUIREMENT_TYPES.map(t => <option key={t} value={t}>{t}</option>)}
                 </select>
-
-                <button
-                    onClick={() => addRequirement("bring_item")}
-                    className="bg-blue-600 hover:bg-blue-700 px-3 py-1 rounded text-white"
-                >
-                    Ajouter bring_item
-                </button>
             </div>
 
             <hr className="border-white/10 my-4" />
@@ -179,13 +172,6 @@ export default function SubQuestEditor({
                     <option value="" disabled>+ Ajouter reward</option>
                     {REWARD_TYPES.map(t => <option key={t} value={t}>{t}</option>)}
                 </select>
-
-                <button
-                    onClick={() => addReward("give_item")}
-                    className="bg-blue-600 hover:bg-blue-700 px-3 py-1 rounded text-white"
-                >
-                    Ajouter give_item
-                </button>
             </div>
         </div>
     );

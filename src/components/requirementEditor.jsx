@@ -37,7 +37,8 @@ export default function RequirementEditor({ requirement, onChange, onRemove, all
                     <input
                         type="number"
                         className="bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-white w-full"
-                        value={requirement.quantity || 1}
+                        placeholder="Quantity"
+                        value={requirement.quantity || ""}
                         onChange={e => update("quantity", Number(e.target.value))}
                     />
                 </>
@@ -55,7 +56,7 @@ export default function RequirementEditor({ requirement, onChange, onRemove, all
 
                     <input
                         className="bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-white w-full"
-                        placeholder="tool (optional)"
+                        placeholder="Tool (optional)"
                         value={requirement.tool || ""}
                         onChange={e => update("tool", e.target.value)}
                     />
@@ -63,7 +64,8 @@ export default function RequirementEditor({ requirement, onChange, onRemove, all
                     <input
                         type="number"
                         className="bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-white w-full"
-                        value={requirement.quantity || 1}
+                        placeholder="Quantity"
+                        value={requirement.quantity || ""}
                         onChange={e => update("quantity", Number(e.target.value))}
                     />
                 </>
@@ -82,7 +84,8 @@ export default function RequirementEditor({ requirement, onChange, onRemove, all
                     <input
                         type="number"
                         className="bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-white w-full"
-                        value={requirement.quantity || 1}
+                        placeholder="Quantity"
+                        value={requirement.quantity || ""}
                         onChange={e => update("quantity", Number(e.target.value))}
                     />
                 </>
