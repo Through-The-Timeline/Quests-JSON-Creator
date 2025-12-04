@@ -5,6 +5,7 @@ export default function RewardEditor({reward, onChange, onRemove}) {
     const update = (field, val) =>
         onChange({...reward, [field]: val});
 
+
     return (
         <div className="border border-neutral-700 rounded-lg p-3 bg-neutral-900 space-y-2">
 
