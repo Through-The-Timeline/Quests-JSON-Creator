@@ -15,9 +15,11 @@ export const requirementSchema = z.object({
 });
 
 export const rewardSchema = z.object({
-    type: z.enum(["GIVE_ITEM", "UNLOCK_RECIPE", "UNLOCK_EFFECT"]),
+    type: z.enum(["GIVE_ITEM", "GIVE_EFFECT", "UNLOCK_RECIPE", "UNLOCK_EFFECT"]),
     item: z.string().optional(),
     quantity: z.number().optional(),
+    duration: z.number().optional(),
+    level: z.number().optional(),
     recipe: z.string().optional(),
     effect: z.string().optional(),
 });
@@ -32,15 +34,4 @@ export const subQuestSchema = z.object({
     dependencies: z.array(dependencySchema),
     requirements: z.array(requirementSchema),
     rewards: z.array(rewardSchema),
-});
-
-export const questSchema = z.object({
-    questID: z.string(),
-    questName: z.string(),
-    pnj: z.object({
-        name: z.string(),
-        id: z.string(),
-        attributes: z.array(z.string()),
-    }),
-    subQuests: z.array(subQuestSchema),
 });

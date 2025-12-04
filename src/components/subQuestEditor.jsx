@@ -21,6 +21,7 @@ const createEmptyRequirement = (type = "bring_item") => {
 const createEmptyReward = (type = "give_item") => {
     switch (type) {
         case "give_item": return { type, item: "", quantity: 1 };
+        case "give_effect": return { type, effect: "", duration: 1, level: 0};
         default: return { type };
     }
 };

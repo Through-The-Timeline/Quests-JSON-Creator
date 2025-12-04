@@ -8,6 +8,7 @@ export const REQUIREMENT_TYPES = [
 
 export const REWARD_TYPES = [
     "give_item",
+    "give_effect",
     "unlock_recipe",
     "unlock_effect"
 ];
@@ -35,11 +36,3 @@ export const EMPTY_SUBQUEST = {
     rewards: []
 };
 
-export const EMPTY_REQUIREMENT = {
-    type: "bring_item"
-};
-
-export const EMPTY_REWARD = {
-    type: "give_item",
-    quantity: 1
-};

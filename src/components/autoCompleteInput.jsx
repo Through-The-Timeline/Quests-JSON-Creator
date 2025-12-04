@@ -7,7 +7,8 @@ export default function AutoCompleteInput({ value, onChange, category }) {
     const source = {
         item: minecraftData.items,
         block: minecraftData.blocks,
-        entity: minecraftData.entities
+        entity: minecraftData.entities,
+        effect: minecraftData.effects
     }[category] || [];
 
     const suggestions = source.filter(s =>
